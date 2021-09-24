@@ -8,9 +8,9 @@
 参考实现 https://github.com/Qdriving/Bert4Rec_Paddle2.0
 
 # 模型描述
-BERT4Rec将NLP中的mask language任务迁移到序列推荐问题来，给予了序列推荐一种不同于item2item，left2right的训练范式。
+BERT4Rec将NLP中的mask language任务迁移到序列推荐问题来，**给予了序列推荐一种不同于item2item，left2right的训练范式**。
 
-具体来说，对于一条物品序列，以一定的概率p随机mask掉序列中的物品，使用transformer的encoder结构对mask item进行预测。
+具体来说，对于一条物品序列，**以一定的概率p随机mask掉序列中的物品**，**使用transformer的encoder结构**对mask item进行预测。
 
 通过数据增强，完形填空任务的方式使得训练更加充分。
 
@@ -74,10 +74,10 @@ CUDA_VISIBLE_DEVICES=0 python3 ml1m.py
 
 - **到根目录下运行以下语句以复现Beauty数据集上的效果**
 ```
-CUDA_VISIBLE_DEVICES=0 python3 beauty.py 
+CUDA_VISIBLE_DEVICES=1 python3 beauty.py 
 ```
 
-Fell free to change the parameter setting.
+- Fell free to change the parameter setting.
 
 # 代码结构与详细说明
 
