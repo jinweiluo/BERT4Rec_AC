@@ -33,3 +33,22 @@ BERT4Rec论文的一个创新点是将nlp领域完形填空式的任务引入序
 
 # 数据生成与数据增强
 下载数据放置到 ./dataset/modelnet40_normal_resampled/
+
+```
+|--models
+  |--rank
+    |--dlrm                   # 本项目核心代码
+      |--data                 # 采样小数据集
+      |--config.yaml          # 采样小数据集模型配置
+      |--config_bigdata.yaml  # Kaggle Criteo 全量数据集模型配置
+      |--criteo_reader.py     # dataset加载类            
+      |--dygraph_model.py     # PaddleRec 动态图模型训练类
+      |--net.py               # dlrm 核心算法代码，包括 dlrm 组网等
+|--tools                      # PaddleRec 工具类
+|--LICENSE                    # 项目 LICENSE
+|--README.md                  # readme
+|--README-old.md              # 原始 readme
+|--README_CN.md               # PaddleRec 中文 readme
+|--README_EN.md               # PaddleRec 英文 readme
+|--run.sh                     # 项目执行脚本(需在 aistudio notebook 中运行)
+```
