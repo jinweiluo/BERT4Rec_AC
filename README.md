@@ -39,7 +39,36 @@ BERT4Rec论文的一个创新点是将nlp领域完形填空式的任务引入序
 
 
 # 数据生成与数据增强
-下载数据放置到 ./dataset/modelnet40_normal_resampled/
+Beauty: http://jmcauley.ucsd.edu/data/amazon/
+MovieLens: https://grouplens.org/datasets/movielens
+
+下载数据放置到 ./bert_train/data/
+
+
+# 快速开始
+
+1.数据增强
+
+运行./bert_train/gen_data_ml1m.py进行ML-1m的数据生成与增强
+
+运行./bert_train/gen_data_beauty.py进行ML-1m的数据生成与增强
+
+2.候选集采样与生成
+
+这里需要说明的是，在序列推荐，包括BERT4Rec，为了降低inference的时间，对于每一个target item会采样100个负样本。即是说将候选物品的数量限制在101个（一个正样本，100个负样本）
+
+我们根据作者开源代码进行负样本的采样。（根据流行度采样）
+
+运行./candidate_gen.py 进行候ML-1m数据集候选集的生成
+
+运行./candidate_gen_beauty.py 进行候beauty数据集候选集的生成
+
+3.训练与预测
+
+
+
+
+# 代码结构与详细说明
 
 ```
 |--models
