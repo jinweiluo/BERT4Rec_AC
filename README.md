@@ -82,20 +82,19 @@ CUDA_VISIBLE_DEVICES=1 python3 beauty.py
 # 代码结构与详细说明
 
 ```
-|--models
-  |--rank
-    |--dlrm                   # 本项目核心代码
-      |--data                 # 采样小数据集
-      |--config.yaml          # 采样小数据集模型配置
-      |--config_bigdata.yaml  # Kaggle Criteo 全量数据集模型配置
-      |--criteo_reader.py     # dataset加载类            
-      |--dygraph_model.py     # PaddleRec 动态图模型训练类
-      |--net.py               # dlrm 核心算法代码，包括 dlrm 组网等
-|--tools                      # PaddleRec 工具类
-|--LICENSE                    # 项目 LICENSE
-|--README.md                  # readme
-|--README-old.md              # 原始 readme
-|--README_CN.md               # PaddleRec 中文 readme
-|--README_EN.md               # PaddleRec 英文 readme
-|--run.sh                     # 项目执行脚本(需在 aistudio notebook 中运行)
+|--bert4rec
+   |--bert4rec_ac.py          # BERT4Rec模型文件
+   |--modules.py              # 组块文件
+   |--dataset.py              # dataset加载类            
+|--bert_train                     
+   |--data                        # 存放数据
+   |--....                        # 模型config，数据增强函数
+|--utils                          # 工具类
+|--evaluate.py                    # 工具类-评估函数
+|--beauty.py                      # 复现Beauty数据集
+|--ml1m.py                        # 复现ML-1m数据集
+|--README.md                      # readme
+|--candidate_gen.py               # 候选集采样与生成-ML-1m
+|--candidate_gen_beauty.py        # 候选集采样与生成-Beauty
+|--beauty_log.txt                 # 复现Beauty的日志
 ```
