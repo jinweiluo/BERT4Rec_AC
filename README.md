@@ -25,7 +25,9 @@ BERT4Rec论文的一个创新点是将nlp领域完形填空式的任务引入序
 
 # 环境依赖
 - 硬件：CPU、GPU
-- 框架： - PaddlePaddle >= 2.0.0 - Python >= 3.7
+- 框架： 
+   - PaddlePaddle >= 2.0.0 
+   - Python >= 3.7
         
 
 
