@@ -32,7 +32,7 @@ from utils.args import ArgumentGroup, print_arguments
 
 parser = argparse.ArgumentParser(__doc__)
 model_g = ArgumentGroup(parser, "model", "model configuration and paths.")
-model_g.add_arg("bert_config_path", str, "./bert_train/bert_config_ml-1m_256.json",
+model_g.add_arg("bert_config_path", str, "./bert_train/bert_config_ml-1m_128.json",
                 "Path to the json file for bert model config.")
 
 train_g = ArgumentGroup(parser, "training", "training options")
