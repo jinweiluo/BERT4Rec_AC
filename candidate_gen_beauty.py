@@ -6,9 +6,9 @@ from utils.args import ArgumentGroup, print_arguments
 
 parser = argparse.ArgumentParser(__doc__)
 data_g = ArgumentGroup(parser, "data", "Data paths, vocab paths and data processing options")
-data_g.add_arg("data_name", str, "ml-1m", "Path to training data.")
-data_g.add_arg("test_set_dir", str, "./bert_train/data/ml-1m-test.txt", "Path to test data.")
-data_g.add_arg("vocab_path", str, "./bert_train/data/ml-1m2.0.2.vocab", "Vocabulary path.")
+data_g.add_arg("data_name", str, "beauty", "Path to training data.")
+data_g.add_arg("test_set_dir", str, "./bert_train/data/beauty-test.txt", "Path to test data.")
+data_g.add_arg("vocab_path", str, "./bert_train/data/beauty2.0.2.vocab", "Vocabulary path.")
 data_g.add_arg("save_dir", str, "./bert_train/data/", "Path to test data.")
 
 
