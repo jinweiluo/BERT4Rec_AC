@@ -5,6 +5,8 @@
 
 原论文代码 https://github.com/FeiSun/BERT4Rec
 
+参考实现 https://github.com/Qdriving/Bert4Rec_Paddle2.0
+
 # 模型描述
 BERT4Rec将NLP中的mask langua任务迁移到序列推荐问题来，给予了序列推荐一种不同于item2item，left2right的训练范式。
 
