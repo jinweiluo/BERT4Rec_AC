@@ -66,8 +66,18 @@ MovieLens: https://grouplens.org/datasets/movielens
 
 **3.训练与预测**
 
+- **到根目录下运行以下语句以复现ML-1m数据集上的效果**
+```
+CUDA_VISIBLE_DEVICES=0 python3 ml1m.py 
+```
 
 
+- **到根目录下运行以下语句以复现Beauty数据集上的效果**
+```
+CUDA_VISIBLE_DEVICES=0 python3 beauty.py 
+```
+
+Fell free to change the parameter setting.
 
 # 代码结构与详细说明
 
