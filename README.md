@@ -97,4 +97,7 @@ CUDA_VISIBLE_DEVICES=1 python3 beauty.py
 |--candidate_gen.py               # 候选集采样与生成-ML-1m
 |--candidate_gen_beauty.py        # 候选集采样与生成-Beauty
 |--beauty_log.txt                 # 复现Beauty的日志
+|--ml1m_log.txt                   # 复现ML-1m的日志1
+|--ml1m_log2.txt                  # 复现ML-1m的日志2
+|--ml1m_log3.txt                  # 复现ML-1m的日志3
 ```
