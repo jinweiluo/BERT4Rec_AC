@@ -1,0 +1,97 @@
+-----------  Configuration Arguments -----------
+batch_size: 256
+bert_config_path: ./bert_train/bert_config_ml-1m_256.json
+candidate_path: ./bert_train/data/ml-1m.candidate
+data_dir: ./bert_train/data/ml-1m-train.txt
+data_name: ml-1m
+epoch: 300
+learning_rate: 0.001
+max_seq_len: 200
+num_train_steps: 800000
+test_set_dir: ./bert_train/data/ml-1m-test.txt
+validation_steps: 1000
+vocab_path: ./bert_train/data/ml-1m2.0.2.vocab
+warmup_steps: 1000
+weight_decay: 0.01
+------------------------------------------------
+Start to train Bert4rec
+attention_probs_dropout_prob: 0.2
+hidden_act: gelu
+hidden_dropout_prob: 0.5
+hidden_size: 256
+initializer_range: 0.02
+intermediate_size: 1024
+max_position_embeddings: 200
+num_attention_heads: 8
+num_hidden_layers: 2
+type_vocab_size: 2
+vocab_size: 3420
+------------------------------------------------
+W0924 10:07:14.149644  1242 device_context.cc:404] Please NOTE: device: 0, GPU Compute Capability: 7.0, Driver API Version: 10.1, Runtime API Version: 10.1
+W0924 10:07:14.161422  1242 device_context.cc:422] device: 0, cuDNN Version: 7.6.
+load candidate from :./bert_train/data/ml-1m.candidate
+ac_ml1m.py:131: DeprecationWarning:
+Warning:
+API "paddle.nn.functional.loss.softmax_with_cross_entropy" is deprecated since 2.0.0, and will be removed in future versions. Please use "paddle.nn.functional.cross_entropy" instead.
+reason: Please notice that behavior of "paddle.nn.functional.softmax_with_cross_entropy" and "paddle.nn.functional.cross_entropy" is different.
+  logits=fc_out, label=mask_label, return_softmax=True)
+epoch: 0, aver loss is: [6.8909354]
+epoch:    0, HR@10: 0.611753, NDCG@10: 0.380845, MRR: 0.323778
+epoch: 1, aver loss is: [5.4492397]
+epoch:    1, HR@10: 0.669837, NDCG@10: 0.446946, MRR: 0.389424
+epoch: 2, aver loss is: [5.2233877]
+epoch:    2, HR@10: 0.685802, NDCG@10: 0.463806, MRR: 0.406016
+epoch: 3, aver loss is: [5.1060596]
+epoch:    3, HR@10: 0.685292, NDCG@10: 0.466820, MRR: 0.410165
+epoch: 4, aver loss is: [5.0302773]
+epoch:    4, HR@10: 0.687840, NDCG@10: 0.471297, MRR: 0.414889
+epoch: 5, aver loss is: [4.974857]
+epoch:    5, HR@10: 0.688010, NDCG@10: 0.471377, MRR: 0.414940
+epoch: 6, aver loss is: [4.930446]
+epoch:    6, HR@10: 0.688349, NDCG@10: 0.471288, MRR: 0.414844
+epoch: 7, aver loss is: [4.8949695]
+epoch:    7, HR@10: 0.680876, NDCG@10: 0.470039, MRR: 0.416007
+epoch: 8, aver loss is: [4.863256]
+epoch:    8, HR@10: 0.684952, NDCG@10: 0.472715, MRR: 0.417973
+epoch: 9, aver loss is: [4.8373513]
+epoch:    9, HR@10: 0.687840, NDCG@10: 0.473452, MRR: 0.417921
+epoch: 10, aver loss is: [4.8140364]
+epoch:   10, HR@10: 0.684952, NDCG@10: 0.472978, MRR: 0.418343
+epoch: 11, aver loss is: [4.7931557]
+epoch:   11, HR@10: 0.686651, NDCG@10: 0.472893, MRR: 0.417564
+epoch: 12, aver loss is: [4.7722573]
+epoch:   12, HR@10: 0.687840, NDCG@10: 0.473108, MRR: 0.417249
+epoch: 13, aver loss is: [4.752644]
+epoch:   13, HR@10: 0.689029, NDCG@10: 0.478166, MRR: 0.423307
+epoch: 14, aver loss is: [4.731401]
+epoch:   14, HR@10: 0.686990, NDCG@10: 0.475363, MRR: 0.420533
+epoch: 15, aver loss is: [4.706019]
+epoch:   15, HR@10: 0.689538, NDCG@10: 0.479970, MRR: 0.425604
+epoch: 16, aver loss is: [4.6780524]
+epoch:   16, HR@10: 0.688859, NDCG@10: 0.479665, MRR: 0.425353
+epoch: 17, aver loss is: [4.6529264]
+epoch:   17, HR@10: 0.687670, NDCG@10: 0.479808, MRR: 0.426140
+epoch: 18, aver loss is: [4.63317]
+epoch:   18, HR@10: 0.684613, NDCG@10: 0.482861, MRR: 0.431177
+epoch: 19, aver loss is: [4.617014]
+epoch:   19, HR@10: 0.691067, NDCG@10: 0.483847, MRR: 0.430155
+epoch: 20, aver loss is: [4.60251]
+epoch:   20, HR@10: 0.688179, NDCG@10: 0.483225, MRR: 0.430392
+epoch: 21, aver loss is: [4.5887923]
+epoch:   21, HR@10: 0.692935, NDCG@10: 0.486177, MRR: 0.432437
+epoch: 22, aver loss is: [4.576117]
+epoch:   22, HR@10: 0.693274, NDCG@10: 0.483334, MRR: 0.428379
+epoch: 23, aver loss is: [4.564119]
+epoch:   23, HR@10: 0.693784, NDCG@10: 0.488039, MRR: 0.434650
+epoch: 24, aver loss is: [4.553675]
+epoch:   24, HR@10: 0.691236, NDCG@10: 0.483946, MRR: 0.430124
+epoch: 25, aver loss is: [4.543427]
+epoch:   25, HR@10: 0.692765, NDCG@10: 0.484271, MRR: 0.430075
+epoch: 26, aver loss is: [4.5343246]
+epoch:   26, HR@10: 0.693274, NDCG@10: 0.484519, MRR: 0.430100
+epoch: 27, aver loss is: [4.5259194]
+epoch:   27, HR@10: 0.691406, NDCG@10: 0.484000, MRR: 0.430110
+epoch: 28, aver loss is: [4.516454]
+epoch:   28, HR@10: 0.692425, NDCG@10: 0.484533, MRR: 0.430644
+epoch: 29, aver loss is: [4.5084176]
+epoch:   29, HR@10: 0.692595, NDCG@10: 0.486158, MRR: 0.432563
