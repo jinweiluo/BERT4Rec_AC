@@ -1,9 +1,4 @@
-import paddle
-from paddle.io import Dataset
-from paddle.vision.transforms import Compose, Resize
 import numpy as np
-import random
-import linecache
 
 
 class DataReader(object):
@@ -25,11 +20,11 @@ class DataReader(object):
         def wraper():
             sample_count = 0
             for split_samples in self.read_file(self.data_dir):
-                if sample_count%self.batch_size == 0:
-                    src_ids= []
-                    pos_ids= []
-                    input_mask= []
-                    mask_pos= []
+                if sample_count % self.batch_size == 0:
+                    src_ids = []
+                    pos_ids = []
+                    input_mask = []
+                    mask_pos = []
                     mask_label = []
                 split_samples = split_samples.split(";") 
                 tmp_ids = split_samples[1].split(',')
@@ -39,17 +34,15 @@ class DataReader(object):
                 tmp_mask = split_samples[2].split(',')
                 input_mask.append([[int(x)] for x in tmp_mask])
                 tmp_mask_pos = split_samples[4].split(',')
-                mask_pos = mask_pos + [[int(x)+(sample_count%self.batch_size)*self.max_len] for x in tmp_mask_pos]
+                mask_pos = mask_pos + [[int(x)+(sample_count % self.batch_size)*self.max_len] for x in tmp_mask_pos]
                 tmp_label = split_samples[5].split(',')
                 mask_label = mask_label + [[int(x)] for x in tmp_label]
-
                 sample_count += 1
-
-                if sample_count%self.batch_size == 0:
-                    src_ids= np.array(src_ids)
-                    pos_ids= np.array(pos_ids)
-                    input_mask= np.array(input_mask)
-                    mask_pos= np.array(mask_pos)
+                if sample_count % self.batch_size == 0:
+                    src_ids = np.array(src_ids)
+                    pos_ids = np.array(pos_ids)
+                    input_mask = np.array(input_mask)
+                    mask_pos = np.array(mask_pos)
                     mask_label = np.array(mask_label)
                     yield src_ids, pos_ids, input_mask,  mask_pos, mask_label
 

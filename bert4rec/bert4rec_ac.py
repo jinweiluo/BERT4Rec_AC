@@ -11,17 +11,15 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
-"""BERT model."""
-
+"""BERT4Rec model."""
 from __future__ import absolute_import
 from __future__ import division
 from __future__ import print_function
-
 import six
 import json
 import paddle
 import paddle.nn as nn
-from bert4rec.modules import encoder, normalize_drop_layer, normalize_layer
+from bert4rec.modules import Encoder, NormalizeDropLayer, NormalizeLayer
 
 
 class BertConfig(object):
@@ -86,16 +84,14 @@ class BertModel(nn.Layer):
                                              name=self._pos_emb_name,
                                              initializer=self._param_initializer),
                                          sparse=False)
-
         self.sent_emb = nn.Embedding(num_embeddings=self._sent_types,
                                      embedding_dim=self._emb_size,
                                      weight_attr=paddle.ParamAttr(
                                          name=self._sent_emb_name,
                                          initializer=self._param_initializer),
                                      sparse=False)
-
-        self.enc_pre_process_layer = normalize_drop_layer(self._dropout, self._emb_size, name='pre_encoder')
-        self._enc_out_layer = encoder(
+        self.enc_pre_process_layer = NormalizeDropLayer(self._dropout, self._emb_size, name='pre_encoder')
+        self._enc_out_layer = Encoder(
                                 n_layer=self._n_layer,
                                 n_head=self._n_head,
                                 d_key=self._emb_size // self._n_head,
@@ -106,7 +102,6 @@ class BertModel(nn.Layer):
                                 hidden_act=self._hidden_act,
                                 param_initializer=self._param_initializer,
                                 name='encoder')
-
         self.mask_trans_feat = nn.Linear(in_features=self._emb_size,
                                          out_features=self._emb_size,
                                          weight_attr=paddle.ParamAttr(
@@ -114,9 +109,7 @@ class BertModel(nn.Layer):
                                              initializer=self._param_initializer),
                                          bias_attr=paddle.ParamAttr(name='mask_lm_trans_fc.b_0'))
         self.mask_trans_act = self._hidden_act
-
-        self.mask_post_process_layer = normalize_layer(self._emb_size, name='mask_lm_trans')
-
+        self.mask_post_process_layer = NormalizeLayer(self._emb_size, name='mask_lm_trans')
         self.mask_lm_out_bias = self.create_parameter(
             shape=[self._voc_size],
             dtype=self._dtype,
@@ -131,49 +124,34 @@ class BertModel(nn.Layer):
         emb_out = emb_out + position_embs_out
         sent_emb_out = self.sent_emb(sent_ids)
         emb_out = emb_out + sent_emb_out
-
         emb_out = self.enc_pre_process_layer(emb_out)
-
         if self._dtype == "float16":
             input_mask = paddle.cast(x=input_mask, dtype=self._dtype)
         else:
             input_mask = paddle.cast(x=input_mask, dtype='float32')
         self_attn_mask = paddle.matmul(
             x=input_mask, y=input_mask, transpose_y=True)
-
         self_attn_mask = paddle.scale(
             x=self_attn_mask, scale=10000.0, bias=-1.0, bias_after_scale=False)
         n_head_self_attn_mask = paddle.stack(
             x=[self_attn_mask] * self._n_head, axis=1)
         n_head_self_attn_mask.stop_gradient = True
-
         self._enc_out = self._enc_out_layer(enc_input=emb_out, attn_bias=n_head_self_attn_mask)
-
         mask_pos = paddle.cast(x=mask_pos, dtype='int32')
-
         reshaped_emb_out = paddle.reshape(
             x=self._enc_out, shape=[-1, self._emb_size])
         mask_feat = paddle.gather(x=reshaped_emb_out, index=mask_pos, axis=0)
-
         mask_trans_feat_out = self.mask_trans_feat(mask_feat)
         mask_trans_feat_out = self.mask_trans_act(mask_trans_feat_out)
         mask_trans_feat_out = self.mask_post_process_layer(out=mask_trans_feat_out)
-
         for name, param in self.named_parameters():
             if name == "word_emb.weight":
                 y_tensor = param
                 break
-
-
         fc_out = paddle.matmul(
             x=mask_trans_feat_out,
             y=y_tensor,
             transpose_y=True)
-
         fc_out += self.mask_lm_out_bias
-
-
         return fc_out
 
-    def get_sequence_output(self):
-        return self._enc_out
