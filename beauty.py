@@ -23,12 +23,37 @@ import re
 import paddle
 import paddle.nn as nn
 import paddle.fluid as fluid
-
+import six
 import pickle
 from bert4rec.dataset import DataReader
 from bert4rec.bert4rec_ac import BertModel, BertConfig
 from evaluate import *
-from utils.args import ArgumentGroup, print_arguments
+
+
+def str2bool(v):
+    return v.lower() in ("true", "t", "1")
+
+
+class ArgumentGroup(object):
+    def __init__(self, parser, title, des):
+        self._group = parser.add_argument_group(title=title, description=des)
+
+    def add_arg(self, name, type, default, help, **kwargs):
+        type = str2bool if type == bool else type
+        self._group.add_argument(
+            "--" + name,
+            default=default,
+            type=type,
+            help=help + ' Default: %(default)s.',
+            **kwargs)
+
+
+def print_arguments(args):
+    print('-----------  Configuration Arguments -----------')
+    for arg, value in sorted(six.iteritems(vars(args))):
+        print('%s: %s' % (arg, value))
+    print('------------------------------------------------')
+
 
 parser = argparse.ArgumentParser(__doc__)
 model_g = ArgumentGroup(parser, "model", "model configuration and paths.")
