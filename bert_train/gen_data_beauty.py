@@ -549,7 +549,7 @@ def main():
     # notice that the final train data contain the 10 cloze forms of data and one mask_last form of data
     # while the form of mask_last aims to narrow the gap of training and test
     train_total = open(output_dir + dataset_name + "-train.txt", 'a')
-    for i in range(dupe_factor):
+    for i in range(dupe_factor+1):
         f = open(output_dir + dataset_name + "_train_" + str(i) + ".txt")
         buf = f.read()
         f.close()
